@@ -18,13 +18,14 @@ func (m *Matrix) At(row, col int) int {
 func SafeRow(m *Matrix, r int) bool {
 	var is_safe = true
 	var l_aux []int
-	l_aux = append(l_aux, m.At(r, 0))
+	l_aux = append(l_aux, 0)
 	for i := 1; i < m.Cols; i++ {
-		l_aux = append(l_aux, l_aux[len(l_aux)-1]-m.At(r, i))
+		l_aux = append(l_aux, m.At(r, i-1)-m.At(r, i))
 	}
+	fmt.Println(l_aux)
 	for i := 1; i < len(l_aux); i++ {
 		var diff = int(math.Abs(float64(l_aux[i] - l_aux[i-1])))
-		if diff == 0 || diff > 3 {
+		if diff == 0 || diff > 3 || (l_aux[i]*l_aux[i-1] < 0) {
 			is_safe = false
 		}
 	}
@@ -40,7 +41,7 @@ func main() {
 	var count = 0
 	for r := 0; r < input.Rows; r++ {
 		var safe = SafeRow(input, r)
-		if safe == false {
+		if safe == true {
 			count += 1
 		}
 	}
