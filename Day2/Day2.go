@@ -70,7 +70,7 @@ func main() {
 		///var safe = SafeRow(input)
 		/// Part two
 		var safe = Dampener(input)
-		fmt.Println(input, "---", safe, "\n")
+		fmt.Println(input, "---", safe)
 
 		if safe == true {
 			count += 1
