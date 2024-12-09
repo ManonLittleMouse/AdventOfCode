@@ -61,9 +61,21 @@ func ComputeDiff(u, v []int) int {
 	return count
 }
 
+func ComputeSim(u, v []int) int {
+	count := 0
+	for i := 0; i < len(u); i++ {
+		el := u[i]
+		sim := 0
+		for j := 0; j < len(v); j++ {
+			if el == v[j] {
+				sim++
+			}
+		}
+		count += el * sim
+	}
+	return count
+}
 func main() {
-	/// var l1 = []int{3, 4, 2, 1, 3, 3}
-	/// var l2 = []int{4, 3, 5, 3, 9, 3}
 	var l1 []int
 	var l2 []int
 	file, err := os.ReadFile("input.txt")
@@ -80,7 +92,15 @@ func main() {
 		var i2, _ = strconv.Atoi(s2)
 		l2 = append(l2, i2)
 	}
-	/// print(len(l1), len(l2))
-	var count = ComputeDiff(l1, l2)
-	fmt.Println(count)
+
+	/// Part One
+
+	//var count = ComputeDiff(l1, l2)
+	// fmt.Println(count)
+
+	/// Part two
+
+	var count2 = ComputeSim(l1, l2)
+	print(count2)
+
 }
